@@ -4,6 +4,7 @@
 #include <imgui_impl_opengl3.h>
 #include "IWindow.hpp"
 #include <GLFW/glfw3.h>
+#include "config.h"
 
 bool UIContext::init(IWindow *window)
 {
@@ -20,6 +21,9 @@ bool UIContext::init(IWindow *window)
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;       // Enable Keyboard Controls
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
     io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;         // Enable Multi-Viewport / Platform Windows
+
+    ImFont* font = io.Fonts->AddFontFromFileTTF(FONT_LOCATION, 20.0f);
+    
 
     auto& colors = ImGui::GetStyle().Colors;
     colors[ImGuiCol_WindowBg] = ImVec4{ 0.1f, 0.1f, 0.1f, 1.0f };
@@ -52,6 +56,7 @@ bool UIContext::init(IWindow *window)
       style.WindowRounding = 0.0f;
       style.Colors[ImGuiCol_WindowBg].w = 1.0f;
     }
+
 
     // Setup Platform/Renderer backends
     ImGui_ImplGlfw_InitForOpenGL((GLFWwindow*)mWindow->getNativeWindow(), true);

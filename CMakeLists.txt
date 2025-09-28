@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.19...3.22)
 
-set(CMAKE_TOOLCHAIN_FILE "D:/Workspace/github/vcpkg/scripts/buildsystems/vcpkg.cmake")
+set(CMAKE_TOOLCHAIN_FILE "F:/Workspace/github/vcpkg/scripts/buildsystems/vcpkg.cmake")
 project(OpenGLImgui)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -31,7 +31,8 @@ set(source_files
 )
 
 add_subdirectory(third_party)
+configure_file(cmake/config.h.in config.h @ONLY)
 
 add_executable(${PROJECT_NAME} ${source_files})
 target_link_libraries(${PROJECT_NAME} PRIVATE imgui::imgui glfw glad::glad ImGuiHelper)
-target_include_directories(${PROJECT_NAME} PRIVATE include)
+target_include_directories(${PROJECT_NAME} PRIVATE include ${CMAKE_CURRENT_BINARY_DIR})
